@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>{{ request.user.username}} kullanıcı paneli</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div id="inf">
+        <center>
+            <div id="title"><h2>{{ request.user.username}} Kullanıcı Paneli</h2></div>
+            <div id="text" style="margin-left: 100px; margin-right: 100px;"><p>
+                Bu kullanıcı kontrol paneli sizin günlüklerinizi oluşturmanız, kontrol etmeniz ve hepsini tek bir bakışta görebilmeniz için var. Aşağıdaki tablodan önce günlüklerinizi yazabilir, sonra güncelleyebilir veya silebilirsiniz. İyi yazmalar...
+            </p></div>
+        </center>
+    </div>
+    <hr>
+   
+    <div id="diaries" style="margin-top: 45px;">
+        <div id="title">
+            <div id="text" style="float: left;"><b><h5>GÜNLÜKLER</h5></b></div>
+            <div id="button" style="float: right;">
+                <a href="/blogs/add-blog/" class="btn btn-success">Yeni günlük oluştur!</a>
+            </div>
+        </div>
+        <div id="table">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">Başlık</th>
+                      <th scope="col">Oluşturulma Tarihi</th>
+                      <th scope="col">Güncelle</th>
+                      <th scope="col">Sil</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for blog in blogs %}
+                        <tr>
+                        <th><a href="/blogs/detail/{{blog.id}}">{{ blog.title }}</a></th>
+                        <td>{{ blog.created_at }}</td>
+                        <td><a href="/blogs/update/{{blog.id}}" class="btn btn-primary">Güncelle</a></td>
+                        <td><a href="/blogs/delete/{{blog.id}}" class="btn btn-danger">Sil</a></td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

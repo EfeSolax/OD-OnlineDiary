@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>{{ blog.title }}</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+        <h1 class="mt-4">{{ blog.title }}</h1>
+        <p class="lead">
+            Yazar: <big>{{ blog.author.username }}</big>
+        </p>
+        <hr>
+        <p>{{ blog.created_at }}</p>
+        <hr>
+        <p>{{ blog.content|safe }}</p>
+        <hr>
+
+        <div class="card my-4">
+            <h5 class="card-header">Yorum Ekle:</h5>
+            <div class="card-body">
+              <form method="post" action="/blogs/add-comment/{{blog.id}}">
+                {% csrf_token%}
+              
+                <div class="form-group">
+                  <textarea name = "comment_content" class="form-control" rows="3" placeholder="Yorum..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Ekle</button>
+              </form>
+            </div>
+          </div>
+
+          {% if comments %}
+
+            <hr>
+            <h4>Yorumlar</h4>
+            <hr>
+
+            {% for comment in comments %}
+            <div class="media mb-4">
+                {% if comment.comment_author == request.user.username %}
+                <a class="btn btn-danger" href = "/blogs/delete-comment/{{blog.id}}/{{comment.id}}" style = "margin-right: 10px; float: left; border-radius: 20px;">Sil</a>    
+                {% endif %}
+                
+                <div class="media-body">
+                <div style = "float: right;">
+                    <small>{{comment.comment_date}}</small>   
+                </div>
+                <h5 class="mt-0">{{comment.comment_author}}</h5>
+                {{comment.comment_content}}
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-danger">Mevcut yorum yok.</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

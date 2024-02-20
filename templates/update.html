@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+
+{% block head %}
+<title>Yeni Günlük</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js" integrity="sha512-vf18+TlTmZVlWsyScTwz7pKjX9u9yFkThmG2s7VcIZ+ve0smzkwAVZdqEfiG0gLrrgX9v+8cHssafnhAZFkC0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    autosize(document.querySelectorAll('.autosize'));
+</script>
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div id="inf">
+        <center>
+            <div id="text"><h2>Keyifle Günlüğünüzü Yazın</h2></div>
+        </center>
+    </div>
+    <hr>
+    <div id="main-div" style="margin-top: 20px;">
+        <center>
+            <div id="main" style="background-color: rgb(210, 204, 204); width: 800px; border-radius: 10px; padding: 25px 25px 15px 25px;">
+                <form method="post">
+                    {% csrf_token %}
+
+                    {{form.media}}   
+                    <div id="title">{{ form.title }}</div>
+                    <div id="content">{{ form.content }}</div>
+
+                    <div style="margin-top: 20px;">
+                        <input type="submit" value="Kaydet" class = "bnt btn-success" style="width: 750px;">
+                     </div>        
+                </form>
+            </div>
+        </center>
+    </div>
+</div>
+
+{% endblock %}

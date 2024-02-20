@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>Online-Diary</title>
+
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div id="title-inf" style="margin-bottom: 50px;">
+        <div id="title">
+            <center><h2>Online-Diary'e Hoş Geldiniz</h2></center>
+        </div>
+        <div id="inf">
+            <div style="margin-left: 100px; margin-right: 100px;">
+                <center><p>Sırf bilgisayar dersinden aldığım proje için tasarladığım bu projeye hoş geldin sevgili insan. Bu sitede rastgele insanların yazdıkları günlüklerini okuyabilir ya da sen de onlar gibi günlük yazabilir veya istediğin kategoriden günlükler okuyabilirsin. Bunun için ilk başta <a href="/user/register/">Kayıt Ol</a> sekmesinden kayıt olabilir veya bir hesabın zaten varsa <a href="/user/login/">Giriş Yap</a> sekmesinden giriş yapabilirsin. Hiç değilse canın sitede bir hesabın olmasını istemiyorsa kayıt olmadan anonim bir şekilde de yazabilir veya okuyabilirsin. Ne duruyorsun!</p></center>
+            </div>
+        </div>
+    </div>
+    <hr><br>
+    <div id="main-area">
+        <div id="diaries" style="display: inline-block; width: 70%; float: left;">
+            <div id="example1" style="background-color: #fff; border: black solid 1px; min-height: 400px; border-radius: 5px; padding: 20px 20px 20px 20px;">
+                <div id="title-date">
+                    <div id="date" style="float: right;"><small>21.04.2023</small></div>
+                    <div id="title"><h3>Yaz Kampı!</h3></div>
+                </div>
+                <div id="author">Yazar: <big>EfeSolax</big></div> 
+                <br>
+                <div id="content">Bugün Ela, Ali, Arda ve ben doğada keyifli bir gün geçirdik. Sabah erkenden buluşup piknik malzemelerimizi topladık ve ormanın içine gittik. Yürüyüş yaparak güzel manzaraların tadını çıkardık ve bol bol fotoğraf çektik.
+
+                    Öğlen piknik yapmak için güzel bir yer bulduk. Arda mangalı yakarken, Ela salata hazırladı ve Ali de köfte ve tavukları pişirdi. Hep birlikte yemek yedik ve sohbet ettik. Yemek sonrası doğanın sessizliğinde biraz dinlenip, güneşlenip kitap okuduk.
+                    
+                    Daha sonra, bir nehir kenarına gidip suya girdik. Serin suyla birlikte güneşin sıcaklığı bizi tamamen sardı. Yüzerken, dalga sesleri ve kuşların cıvıltıları eşlik etti bize. Ne kadar zaman geçirdiğimizi fark etmeden suyun keyfini çıkardık.
+                    
+                    Gün batmadan önce, ormana geri döndük. Yine yürüyüş yaparak doğanın tadını çıkardık. Akşam yemeği için ise restoranda rezervasyon yaptırdık. Lezzetli yemekler yedik ve güzel bir günün sonunda mutlu bir şekilde ayrıldık.
+                    
+                    Bugün doğada zaman geçirmek bize gerçekten iyi geldi. Arada bir bu tür kaçamaklar yapmak ve doğanın tadını çıkarmak gerçekten hayatımıza renk katıyor. Bir dahaki sefere yine birlikte gezmek dileğiyle...
+                </div>
+            </div>
+            <br>
+            <div id="example2" style="background-color: #fff; border: black solid 1px; min-height: 400px; border-radius: 5px; padding: 20px 20px 20px 20px; margin-bottom: 50px;">
+                <div id="title-date">
+                    <div id="date" style="float: right;"><small>19.12.2022</small></div>
+                    <div id="title"><h3>Romantik Yağmur</h3></div>
+                </div>
+                <div id="author">Yazar: <big>anonymous_</big></div>
+                <br><br>
+                <div id="content">
+                    Bugün bizim evlilik yıl dönümümüzdü ve geleneksel olarak her yıl pikniğe gitmek için planlar yapmıştık. Ancak hava maalesef bizi üzdü ve yağmur yağmaya başladı. İlk başta üzgündük, ama sonra planlarımızı değiştirip romantik bir gün geçirdik.
+                    
+                    Ama sadece içeride oturup zaman geçirmek istemedik. Hafif yağmur altında romantik bir yürüyüşe çıktık. Şemsiyelerimizi açtık ve parkta yürüyüş yaparken birbirimize sarıldık. Yağmur altında yürümek gerçekten romantik bir deneyimdi ve böyle anları hatırlamak için fotoğraf bile çektik.
+                    
+                    Eve döndüğümüzde, güzel bir şarap açıp birbirimize açtık ve sohbet ettik. Yağmurun hafif sesiyle birlikte, kendimizi evde rahat hissettik ve gerçekten güzel bir evlilik yıl dönümü geçirdik.
+
+                    Bugünün planlarımızın değişmesi bizi üzdü, ama romantik bir gün geçirmemize vesile oldu. Her yıl piknik yapmak gelenek olsa da, değişiklik yapmanın da güzel olabileceğini öğrendik. Eşimle bu özel günümüzü birlikte geçirdiğimiz için çok mutluyum ve gelecek yıllarda ne yapacağımızı planlamak için sabırsızlanıyorum.
+                </div>
+            </div>
+        </div>
+        <div id="edge-boxes" style="display: inline-block; width: 28%; float: right; ">
+            <div id="about-site" style="background-color: white; border-radius: 5px; border: black solid 1px; height: 800px; padding: 15px 15px 15px 15px;">
+                <div><h3>Hemen Şimdi!</h3></div>
+                {% if request.user.is_authenticated %}
+                <p class="alert alert-success">Mevcut Kullanıcı: {{request.user.username}}</p>
+                {% else %}
+                <p>Hemen şimdi kayıt olabilir, giriş yapabilir ve popüler günlükler arasına girebilirsiniz. </p>
+
+                <a href="/user/login/" class="btn btn-primary" style="width:300px; margin-bottom: 10px;">Giriş Yapın!</a>
+                <a href="/user/register/" class="btn btn-primary" style="width:300px; margin-bottom: 10px;">Kayıt Olun!</a>
+                {% endif %}
+
+                <div style="margin-top: 15px;"><h3>Sitemize Bir Yorum!</h3></div>
+                <p>Küçük bir yorumunuzu etkisiz görmeyin. Onlar bizim (yani benim) için çok değerli.</p>
+                <textarea name="" id="" cols="30" rows="4" placeholder="Yorum..." style="border-radius: 5px;"></textarea>
+                <button class="btn btn-danger" style="width: 300px; margin-top: 10px;">Yorum Yap</button>
+
+                <div style="margin-top: 15px;"v><h3>Popüler Günlükler!</h3></div>
+                <p>Siz de onlardan olmak için sadece gününüzü yazın. Tabii hayatınızda biraz aksiyon olması lazım, örneğin bir adada köpek balıklarıyla dalış yapmak ya da paraşütle atlamak gibi... Ama değilse... Hayatınız heyecanlı değilse biz ne yapalım? </p>
+                <h4><a href="">Yaz Kampı!</a></h4>
+                <h4><a href="">Romantik Yağmur...</a><h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

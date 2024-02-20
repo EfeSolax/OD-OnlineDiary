@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>Gezin</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div id="title">
+        <center>
+            <h2>Gezinin</h2>
+                <div style="margin: auto;">
+                  <div class="col-lg-8">
+                    <form>
+                      {% csrf_token %}
+                      <input type="text" name="keyword" class="input-sm" maxlength="64" placeholder="Ara..." style="width:280px; height: 35px; border-radius: 5px;">
+                      <button type = "submit" class="btn btn-danger" style = "height: 30px;">Ara</button>
+                    </form>
+                  </div>
+                </div>
+              
+        </center>
+    </div>
+    <hr>
+    <div id="diaries">
+        {% if blogs %}
+        {% for blog in blogs%}
+
+        <div style="background-color: #fff; border: black solid 1px; border-radius: 5px; padding: 20px 20px 50px 20px; max-width: 800px; margin: auto;">
+            <div id="title-date">
+                <div id="date" style="float: right;"><small>{{blog.created_at}}</small></div>
+                <div id="title"><h3>{{blog.title}}</h3></div>
+            </div>
+            <div>
+                <div id="author">Yazar: <big>{{blog.author.username}}</big></div> 
+                <div id="content">{{blog.content|safe|truncatewords:50}}</div>
+            </div>
+            <div id="button" style="float: right;"><a href="/blogs/detail/{{blog.id}}" class="btn btn-primary">Devamını Oku</a></div>
+            
+        </div>
+        <br>
+        {% endfor %}
+
+        {% else %}  
+        <div class="alert alert-danger">Günlük bulunamadı</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

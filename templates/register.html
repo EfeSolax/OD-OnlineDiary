@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>Kayıt Ol!</title>
+{% endblock %}
+
+{% block body %}
+
+<div style="background-color: rgb(210, 204, 204); margin: auto; margin-top: 100px; width: 500px; height: 470px; padding: 25px 15px 25px 15px; border-radius: 10px;">
+    <div>
+        <center>
+            <h2>Kayıt Olun!</h2>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+
+                {{ form.name }}
+                {{ form.username }}
+                {{ form.email }}
+                {{ form.password }}
+                {{ form.confirmation}}
+
+                <br>
+
+                <button type="submit" class="btn btn-danger" style="width: 350px; height: 45px; border-radius: 10px; margin-bottom: 20px; font-size: 22px;">Onayla!</button>
+            </form>
+        </center>
+    </div>
+</div>
+
+{% endblock %}

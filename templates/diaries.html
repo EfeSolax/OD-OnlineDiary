@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>Tüm günlükler</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div id="text"><center><h2>Tüm Günlükler</h2></center></div>
+    <div id="search">
+        <center>
+            <form>
+                {% csrf_token %}
+                <input type="text" name="keyword" class="input-sm" maxlength="64" placeholder="Ara..." style="width:280px; height: 35px; border-radius: 5px;">
+                <button type = "submit" class="btn btn-danger" style = "height: 30px;">Ara</button>
+            </form>
+        </center>
+    </div>
+    <hr>
+    <div id="table">
+        {% if blogs %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">Başlık</th>
+                  <th scope="col">Oluşturulma Tarihi</th>
+                  <th scope="col">Güncelle</th>
+                  <th scope="col">Sil</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for blog in blogs %}
+                    <tr>
+                    <th><a href="/blogs/detail/{{blog.id}}">{{ blog.title }}</a></th>
+                    <td>{{ blog.created_at }}</td>
+                    {% if request.user.username == blog.author.username %}
+                    <td><a href="/blogs/update/{{blog.id}}" class="btn btn-primary">Güncelle</a></td>
+                    <td><a href="/blogs/delete/{{blog.id}}" class="btn btn-danger">Sil</a></td>
+                    {% else %}
+                    <td>Yetkiniz Yok</td>
+                    <td>Yetkiniz Yok</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+        {% else %}
+          <div class="alert alert-danger">Günlük Bulunamadı</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
